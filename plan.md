@@ -41,7 +41,6 @@
 
 - path
 - fs
-- io
 - streams
 - front_matter // To add metadata to files
 - archive
@@ -58,3 +57,4 @@
 - wasi // Still in preview
 - signal // Deprecated
 - permissions // Deprecated
+- io // Deprecated

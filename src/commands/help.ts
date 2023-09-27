@@ -2,8 +2,9 @@ export function help() {
   console.error(`Deno Stdlib Review
   
     Usage:
-      deno run -A main.ts serve
-      deno run -A main.ts hello <name> --shout --no-shout --surname
+      deno run -A src/main.ts serve
+      deno run -A src/main.ts greet <name> --shout --no-shout --surname
+      deno run -A src/main.ts help
     
     Options:
       -h --help     Show this screen.

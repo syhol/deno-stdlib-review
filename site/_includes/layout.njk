@@ -1,77 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css"
+    />
 
-<head>
-	<meta charset="UTF-8">
-	<title>{{ title }}</title>
-	<style>
-		body {
-			margin: 40px auto;
-			max-width: 850px;
-			line-height: 1.6;
-			font-size: 18px;
-			color: #444;
-			padding: 0 10px
-		}
+    <style>
+      body {
+        margin: 0 auto 40px auto;
+        max-width: 850px;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px;
+      }
 
-		h1,
-		h2,
-		h3 {
-			line-height: 1.2
-		}
+      a,
+      a:visited {
+        text-decoration: none;
+        color: #3498db;
+      }
 
-		blockquote {
-			border-left: 5px solid #333;
-			padding-left: .75em;
-			margin-left: calc(.25em - 5px);
+      a:hover,
+      a:focus,
+      a:active {
+        color: #2980b9;
+      }
 
-			font-style: italic;
-		}
+      h1 {
+        font-size: 3em;
+      }
 
-		pre {
-			overflow: auto;
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 2em;
+        }
+      }
 
-			margin: .75rem 0;
-			padding: .5rem;
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+      }
 
-			white-space: pre;
+      blockquote {
+        border-left: 5px solid #333;
+        padding-left: 0.75em;
+        margin-left: calc(0.25em - 5px);
+        font-style: italic;
+      }
 
-			background-color: #f8f8f8;
-			border: 1px solid #ccc;
-			border-radius: 3px;
-		}
+      pre {
+        overflow: auto;
 
-		code {
-			padding: 0 .25em;
-			font-size: .875em;
+        margin: 0.75rem 0;
+        padding: 0.5rem;
 
-			white-space: pre;
-			font-family: Source Code Pro, monospace;
+        white-space: pre;
 
-			background-color: #f8f8f8;
-			border: 1px solid #ccc;
-			border-radius: 3px;
-		}
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
 
-		pre code {
-			padding: 0;
+      code {
+        padding: 0 0.25em;
+        font-size: 0.875em;
 
-			word-wrap: normal;
-			white-space: pre-wrap;
-		}
+        white-space: pre-wrap;
+        font-family: Source Code Pro, monospace;
 
-		pre code,
-		pre tt {
-			background-color: transparent;
-			border: none;
-		}
-	</style>
-</head>
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
 
-<body>
-	<h1>{{ title }}</h1>
-	<hr>
-	{{ content | safe }}
-</body>
+      pre code,
+      pre tt,
+      code.hljs {
+        background-color: transparent;
+        border: none;
+        word-wrap: normal;
+        white-space: pre-wrap;
+        display: block;
+        overflow-x: auto;
+        padding: 1em;
+      }
+    </style>
+  </head>
 
+  <body>
+    {{ content | safe }}
+  </body>
 </html>

@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: "Chapter 1: Setup a new http server and cli command router"
+title: "Chapter 1: Setup a HTTP server and CLI command router"
 tags: [post]
 ---
 
@@ -44,7 +44,7 @@ listener. so I picked `Server.prototype.listenAndServe` and
 
 I create a key pair for tls and whip up a hello world.
 
-```javascript
+```typescript
 import { Server } from "https://deno.land/std@0.202.0/http/server.ts";
 
 const handler = (_: Request) => {

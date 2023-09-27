@@ -7,7 +7,7 @@
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+  "[nunjucks]": {
+    "editor.defaultFormatter": "guapibai.nunjucks-prettier"
   }
 }

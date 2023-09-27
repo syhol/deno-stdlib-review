@@ -1,31 +1,40 @@
-import { parse } from "https://deno.land/std@0.202.0/flags/mod.ts";
+import { parse } from "std/flags/mod.ts";
 import { serve } from "./commands/serve.ts";
 import { help } from "./commands/help.ts";
 import { greet } from "./commands/greet.ts";
 
-const commandArgs = {
-  boolean: ["help", "shout"],
-  default: {
-    shout: null,
-  },
-  string: ["surname"],
-  alias: { h: "help" },
-  negatable: ["shout"],
-} as const;
-const commandArgsType = parse([], commandArgs);
-type CommandArgs = typeof commandArgsType;
+export async function dispatch(args: string[]): Promise<never> {
+  const parsedArgs = parse(args, {
+    boolean: ["help", "shout"],
+    default: {
+      shout: null,
+    },
+    string: ["surname"],
+    alias: { h: "help" },
+    collect: ["friend"],
+    negatable: ["shout"],
+  });
 
-const commands: Record<string, (args: CommandArgs) => void | Promise<void>> = {
-  serve,
-  help,
-  greet,
-};
+  if (parsedArgs.help) {
+    help();
+    Deno.exit(0);
+  }
 
-export async function dispatch(args: string[]): Promise<void> {
-  const parsedArgs = parse(args, commandArgs);
-  const command = String(parsedArgs._[0] ?? "");
-  const handler = commands[command] ?? fail;
-  return await handler(parsedArgs);
+  type Handler = (args: typeof parsedArgs) => void | Promise<void>;
+  const commands: Record<string, Handler> = {
+    serve,
+    help,
+    greet,
+  };
+  const commandName = String(parsedArgs._[0] ?? "");
+  const command = commands[commandName] ?? fail;
+
+  try {
+    await command(parsedArgs);
+    Deno.exit(0);
+  } catch (_) {
+    Deno.exit(1);
+  }
 }
 
 function fail(args: { _: string[] }) {

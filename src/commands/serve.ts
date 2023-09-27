@@ -1,4 +1,4 @@
-import { Server } from "https://deno.land/std@0.202.0/http/server.ts";
+import { Server } from "std/http/server.ts";
 import { handler } from "../http/handler.ts";
 
 export async function serve() {
