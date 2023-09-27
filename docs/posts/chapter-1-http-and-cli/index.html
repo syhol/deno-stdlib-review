@@ -1,8 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="en"><head>
 	<meta charset="UTF-8">
 	<title>Chapter 1: Setup a new http server and cli command router</title>
 	<style>
@@ -72,7 +69,7 @@
 <body>
 <h1>Chapter 1: Setup a new http server and cli command router</h1>
 <hr>
-	<a href="/"><span style="font-size: 25px;">↜ </span>Table of Contents</a>
+	<a href="/deno-stdlib-review/"><span style="font-size: 25px;">↜ </span>Table of Contents</a>
 <hr>
 <h2>std/http/server.ts</h2>
 <h3>Picking a HTTP server function</h3>
@@ -107,10 +104,10 @@ listener. so I picked <code>Server.prototype.listenAndServe</code> and
 <code>Server.prototype.listenAndServeTls</code>.</p>
 <h3>Writing hello world</h3>
 <p>I create a key pair for tls and whip up a hello world.</p>
-<pre><code class="language-javascript">import { Server } from &quot;https://deno.land/std@0.202.0/http/server.ts&quot;;
+<pre><code class="language-javascript">import { Server } from "https://deno.land/std@0.202.0/http/server.ts";
 
 const handler = (_: Request) =&gt; {
-  return new Response(&quot;Hello world&quot;);
+  return new Response("Hello world");
 };
 
 const httpServer = new Server({ port: 4080, handler });
@@ -118,7 +115,7 @@ const httpsServer = new Server({ port: 4443, handler });
 
 await Promise.all([
   httpServer.listenAndServe(),
-  httpsServer.listenAndServeTls(&quot;./tls/server.crt&quot;, &quot;./tls/server.key&quot;),
+  httpsServer.listenAndServeTls("./tls/server.crt", "./tls/server.key"),
 ]);
 </code></pre>
 <p>Great lets run it.</p>
@@ -134,7 +131,7 @@ Hello world%
 <p>It works! And it was fairly painless.</p>
 <h3>Review</h3>
 <p>If it weren't for the fact that <code>Deno.serve()</code> exists then this would be a fine
-module with the exception of two things. Firstly there is no &quot;onListen&quot; handler
+module with the exception of two things. Firstly there is no "onListen" handler
 for the functions on the <code>Server</code> API which isn't the end of the world but its
 something we've come to expect, and secondly there seems to be no reason to have
 both <code>Server.prototype.serve</code> and <code>serveListener</code>. It feels like an unessassary
@@ -149,7 +146,7 @@ future.</p>
 <h3>Creating a CLI command router</h3>
 
 <hr>
-<a href="/"><span style="font-size: 25px;">↜ </span>Table of Contents</a>
-</body>
+<a href="/deno-stdlib-review/"><span style="font-size: 25px;">↜ </span>Table of Contents</a>
 
-</html>
+
+</body></html>
