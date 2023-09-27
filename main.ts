@@ -15,17 +15,17 @@ const commandArgs = {
 const commandArgsType = parse([], commandArgs);
 type CommandArgs = typeof commandArgsType;
 
-const commands: Record<string, (args: CommandArgs) => void> = {
+const commands: Record<string, (args: CommandArgs) => void | Promise<void>> = {
   serve,
   help,
   greet,
 };
 
-export function dispatch(args: string[]) {
+export async function dispatch(args: string[]): Promise<void> {
   const parsedArgs = parse(args, commandArgs);
   const command = String(parsedArgs._[0] ?? "");
   const handler = commands[command] ?? fail;
-  handler(parsedArgs);
+  return await handler(parsedArgs);
 }
 
 function fail(args: { _: string[] }) {
@@ -39,5 +39,5 @@ function fail(args: { _: string[] }) {
 }
 
 if (import.meta.main) {
-  dispatch(Deno.args);
+  await dispatch(Deno.args);
 }

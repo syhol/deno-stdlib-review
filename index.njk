@@ -1,0 +1,12 @@
+---
+layout: layout.njk
+title: "Syhol's Deno Std Review"
+---
+
+Welcome to Syhol's Deno Std Review
+
+<ul>
+  {% for post in search.pages("post") %}
+  <li><a href="{{ post.data.url }}">{{ post.data.title }}</a></li>
+  {% endfor %}
+</ul>

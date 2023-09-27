@@ -1,8 +1,12 @@
-# Chapter 1: Setup a new http server that parses options
+---
+layout: post.njk
+title: "Chapter 1: Setup a new http server and cli command router"
+tags: [post]
+---
 
 ## std/http/server.ts
 
-### Picking a http server function
+### Picking a HTTP server function
 
 First thing I wanted to do was to setup a HTTP server. Now I know that
 `Deno.serve()` is the recommended way to do this but std/http also has its own
@@ -14,19 +18,6 @@ way of creating servers, in fact it has 6 ways of creating a server:
 - `serveListener(handler, Deno.listen({ port }))`
 - `serve(handler, { port })` (Deprecated) (also distinct from `Deno.serve()`)
 - `serveTls(handler, { port })` (Deprecated)
-
-I like to have a snoop in the code so I can figure out the difference, so I
-write out some of these functions/methods in a new file and CMD+click on them,
-only to see the following message in my VS Code:
-
-> The editor could not be opened due to an unexpected error: Unable to resolve
-> resource https://deno.land/std%400.202.0/http/server.ts
-
-Weird, I can CMD+click on the import url and it takes me to the docs (great
-feature by the way) but when I move focus back to the VS Code window I see the
-same error again. I try to recreate this with some symbols in the the
-https://deno.land/x/oak/mod.ts module and it works as expected. Seems like a
-little bug with std then.
 
 Most of these functions also take a `hostname` but since it defaults to all
 interfaces (`0.0.0.0`) there is little need to change it. It looks like
@@ -51,7 +42,7 @@ listener. so I picked `Server.prototype.listenAndServe` and
 
 ### Writing hello world
 
-I create a key pair for tls and whip up a hello world
+I create a key pair for tls and whip up a hello world.
 
 ```javascript
 import { Server } from "https://deno.land/std@0.202.0/http/server.ts";
@@ -69,7 +60,7 @@ await Promise.all([
 ]);
 ```
 
-Great lets run it
+Great lets run it.
 
 ```
 ❯ deno run -A main.ts
@@ -84,6 +75,8 @@ Hello world%
 ❯ curl https://localhost:4443 -k
 Hello world%
 ```
+
+It works! And it was fairly painless.
 
 ### Review
 
@@ -104,4 +97,4 @@ future.
 
 ## std/flag/mod.md
 
-### 
+### Creating a CLI command router
