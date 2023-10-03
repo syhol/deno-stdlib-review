@@ -69,10 +69,10 @@ $ deno run -A main.ts
 The process is running successfully, lets open a new shell hit it with curl:
 
 ```console
-❯ curl localhost:4080
+$ curl localhost:4080
 Hello world%
 
-❯ curl https://localhost:4443 -k
+$ curl https://localhost:4443 -k
 Hello world%
 ```
 
@@ -159,16 +159,16 @@ Then there are the less obvious ones:
 And now I can run it with some fun variations
 
 ```console
-❯ deno run -A greet.ts Bob
+$ deno run -A greet.ts Bob
 Hello Bob. It's really nice. To meet you. To greet you.
 
-❯ deno run -A greet.ts Bob --shout
+$ deno run -A greet.ts Bob --shout
 HELLO BOB. IT'S REALLY NICE. TO MEET YOU. TO GREET YOU.
 
-❯ deno run -A greet.ts Bob --no-shout --friend Steve --friend=Dave --friend="Chris" --friend "Tim"
+$ deno run -A greet.ts Bob --no-shout --friend Steve --friend=Dave --friend="Chris" --friend "Tim"
 hello bob. it's really nice. to meet you. to greet you. and your friends steve and dave and chris and tim.
 
-❯ deno run -A greet.ts Bob -s --surname Mortimer
+$ deno run -A greet.ts Bob -s --surname Mortimer
 HELLO BOB MORTIMER. IT'S REALLY NICE. TO MEET YOU. TO GREET YOU.
 ```
 
