@@ -1,12 +1,23 @@
 import { Server } from "std/http/server.ts";
 import { handler } from "../http/handler.ts";
+import { parse } from "std/flags/mod.ts";
 
-export async function serve() {
-  const httpServer = new Server({ port: 4080, handler });
-  const httpsServer = new Server({ port: 4443, handler });
+export async function serve(args: string[]) {
+  const options = parse(args, {
+    default: {
+      "http-port": 4080,
+      "https-port": 4443,
+    },
+    string: ["http-port", "https-port"],
+  });
+  const httpPort = Number(options["http-port"]);
+  const httpsPort = Number(options["https-port"]);
 
-  console.log("Running on http://localhost:4080");
-  console.log("Running on https://localhost:4443");
+  const httpServer = new Server({ port: httpPort, handler });
+  const httpsServer = new Server({ port: httpsPort, handler });
+
+  console.log(`Running on http://localhost:${httpPort}`);
+  console.log(`Running on https://localhost:${httpsPort}`);
 
   await Promise.all([
     httpServer.listenAndServe(),
