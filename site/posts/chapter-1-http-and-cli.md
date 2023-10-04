@@ -186,24 +186,29 @@ strings are always strings... right? Wrong. The absence of a string flag gives
 me undefined. Again I can see how it can be rationalized, defaulting to an empty
 string would catch so many people off guard. But I can't see any reason why
 collect would default to anything but an empty array, however unless I define
-the field as both and string and collect, I get undefined. All of the ambiguity
+the field as both string and collect, I get undefined. A lot of the ambiguity
 could be mitigated if fields are required unless we provide explicit defaults.
 This leads me to my second problem.
 
 There is no concept of required. This API has made the design choice to never
 throw an error or fail, so sensible, convenient, and obvious defaults must be
-chosen for each type. Unfortunatly sensible, convenient, and obvious are
+chosen for each type. Unfortunatly "sensible, convenient, and obvious" are
 sometimes at odds with one another. It's also a shame that I need to handle
 missing input error handling myself. You can do some validation with the
 `unknown` and `stopEarly` options but they can't provide me with required
 positional arguments.
 
-Lets look at how we could model this with a zod like API:
+Lastly I need to write all the help text myself. This is a shame when it
+shouldn't be too hard to autogenerate it given the schema. Now my help docs will
+inevitably fall out of sync with the implementation.
+
+I think it could be modeled better with a zod like API, let's see what that
+might look like:
 
 ```typescript
-import { z } from "zod";
+import { z } from "?";
 
-const GreetArgs = z.object({
+const GreetArgs = z.command({
   positional: z.tuple([
     z.string(), // name
     z.number(), // jersey number
@@ -213,13 +218,18 @@ const GreetArgs = z.object({
     surname: z.string().nullable().default(null),
     friend: z.array(z.string()).default([]),
   }),
+  alias: {
+    s: "shout"
+  }
 });
+
+GreetArgs.parse(Deno.args);
 ```
 
-Everything in there is valid zod code. It does lack a few features like aliases
-and short flags but that could be included in a specialized API. Personally I
-find this much easier to understand what the valid inputs are and what I can
-expect to receive after the args are parsed.
+Most of that is valid zod code except the top level command function and alias
+key. Personally I find this much easier to understand what the valid inputs and
+outputs are. And there's nothing special about zod here, there are dozens of
+great input parsers with similar APIs.
 
 Now onwards to create a CLI command router.
 
