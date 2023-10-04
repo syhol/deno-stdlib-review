@@ -198,7 +198,7 @@ missing input error handling myself. You can do some validation with the
 `unknown` and `stopEarly` options but they can't provide me with required
 positional arguments.
 
-Lets look at how we could module this with a zod like API:
+Lets look at how we could model this with a zod like API:
 
 ```typescript
 import { z } from "zod";
